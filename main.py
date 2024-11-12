@@ -59,8 +59,8 @@ def main():
                 sys.exit()
             for bullet in shots:
                 if ast.collide(bullet):
-                    pygame.sprite.Sprite.kill(ast)
                     pygame.sprite.Sprite.kill(bullet)
+                    ast.split()
 
         pygame.display.flip()
 
