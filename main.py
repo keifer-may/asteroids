@@ -20,7 +20,7 @@ def main():
     Player.containers = (updateable, drawable)
     Asteroid.containers = (asteroids, updateable, drawable)
     AsteroidField.containers = (updateable)
-    Shot.containers = (updateable, drawable)
+    Shot.containers = (updateable, drawable, shots)
 
     ## Create time clock and dt
     timer = pygame.time.Clock()
@@ -52,11 +52,15 @@ def main():
         for each in updateable:
             each.update(dt)
 
-        ## Detect any collisions and end game if so
+        ## Detect any collisions with asteroids and player and end game if so
         for ast in asteroids:
             if ast.collide(player):
                 print("Game over!")
                 sys.exit()
+            for bullet in shots:
+                if ast.collide(bullet):
+                    pygame.sprite.Sprite.kill(ast)
+                    pygame.sprite.Sprite.kill(bullet)
 
         pygame.display.flip()
 
