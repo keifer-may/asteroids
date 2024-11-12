@@ -3,6 +3,7 @@ import pygame
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
 from constants import *
+from shot import Shot
 from player import Player
 
 def main():
@@ -13,11 +14,13 @@ def main():
     updateable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
     asteroids = pygame.sprite.Group()
+    shots = pygame.sprite.Group()
 
     ## All player objects must be updateable & drawable
     Player.containers = (updateable, drawable)
     Asteroid.containers = (asteroids, updateable, drawable)
     AsteroidField.containers = (updateable)
+    Shot.containers = (updateable, drawable)
 
     ## Create time clock and dt
     timer = pygame.time.Clock()
