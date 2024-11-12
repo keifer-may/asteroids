@@ -1,3 +1,4 @@
+import sys
 import pygame
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
@@ -32,21 +33,27 @@ def main():
         time = timer.tick(60)
         dt = time/1000
 
-        ## Ensures closing window ends game
+        ## Fill screen black
+        screen.fill("black")
+
+       ## Ensures closing window ends game
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
+
+        ## Draw all drawable objects (players only for now)
+        for each in drawable:
+            each.draw(screen)
 
         ## Update all updateable objects (players only for now)
         for each in updateable:
             each.update(dt)
 
-        ## Fill screen black
-        screen.fill("black")
-
-        ## Draw all drawable objects (players only for now)
-        for each in drawable:
-            each.draw(screen)
+        ## Detect any collisions and end game if so
+        for ast in asteroids:
+            if ast.collide(player):
+                print("Game over!")
+                sys.exit()
 
         pygame.display.flip()
 
