@@ -1,4 +1,6 @@
 import pygame
+from asteroid import Asteroid
+from asteroidfield import AsteroidField
 from constants import *
 from player import Player
 
@@ -9,9 +11,12 @@ def main():
     ## Create groups for our game objects
     updateable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
+    asteroids = pygame.sprite.Group()
 
     ## All player objects must be updateable & drawable
     Player.containers = (updateable, drawable)
+    Asteroid.containers = (asteroids, updateable, drawable)
+    AsteroidField.containers = (updateable)
 
     ## Create time clock and dt
     timer = pygame.time.Clock()
@@ -20,6 +25,7 @@ def main():
     ## Create screen & player object
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     player = Player(x=SCREEN_WIDTH/2, y=SCREEN_HEIGHT/2)
+    field = AsteroidField()
 
     while True:
         ## FPS calcs
