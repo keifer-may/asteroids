@@ -10,16 +10,18 @@ def main():
     player = Player(x=SCREEN_WIDTH/2, y=SCREEN_HEIGHT/2)
 
     while True:
+        time = timer.tick(60)
+        dt = time/1000
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                return       
+                return
+
+        player.update(dt)
         screen.fill("black")
         player.draw(screen)
 
         pygame.display.flip()
-        time = timer.tick(60)
-        dt = time/1000
-
 
     print("Starting asteroids!")
     print(f"Screen width: {SCREEN_WIDTH}")
